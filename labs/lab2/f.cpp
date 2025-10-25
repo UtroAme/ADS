@@ -1,0 +1,58 @@
+#include <iostream>
+using namespace std;
+
+class Node{
+    public:
+    int data;
+    Node* next;
+
+    Node(){
+        data = 0;
+        next = NULL;
+    }
+
+    Node(int data){
+        this-> data = data;
+        this-> next = NULL;
+    }
+};
+
+int main(){
+    int n, x, pos, var;
+    cin >> n;
+
+    Node *head = NULL, *tail = NULL;
+
+    for(int i = 1;i <= n; i++){
+        cin >> x;
+        Node* node = new Node(x);
+        if(head == NULL) head = tail = node;
+        else {
+            tail->next = node;
+            tail = node;
+        }
+    }
+
+    cin >> var >> pos;
+
+    Node* new_node = new Node(var);
+
+    if(pos == 0){
+        new_node->next = head;
+        head = new_node;
+       } else {
+        int cnt = 0;
+          Node* cur = head;
+          while (++cnt != pos)
+            cur = cur->next;
+            new_node-> next = cur->next;
+            cur->next = new_node;
+        }
+        Node* cur = head;
+        while(cur != NULL){
+            cout << cur-> data << " ";
+            cur = cur->next;
+        }
+
+    return 0;
+}
